@@ -1,0 +1,18 @@
+const express = require("express");
+const app =new express;
+app.set('view engine', 'ejs');
+app.set('views','./src/views');
+app.engine('ejs',require('ejs').__express);
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(express.static('./public'));
+app.use(express.urlencoded({extended:true}));
+const ups=require("./src/model/login");
+const bookRouter=require("./src/route/bookRouter")();
+const authRouter=require("./src/route/auth")();
+const loginRouter=require("./src/route/login")();
+app.use('/book',bookRouter);
+app.use('/auth',authRouter);
+app.use('/login',loginRouter);
+console.log(4300);
+app.listen(4300); 
